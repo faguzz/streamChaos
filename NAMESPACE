@@ -1,0 +1,59 @@
+import(methods)
+import(proxy)
+import(stream)
+
+importFrom(tseriesChaos, embedd)
+import(seewave)
+import(pracma)
+import(crqa)
+import(permute)
+import(gromovlab)
+
+export(
+	# DSCDD
+    DSCDD,
+    DSCDD_R,
+
+    DSCDD_ADWIN,
+    DSCDD_CUSUM,
+    DSCDD_MultidimensionalFourier,
+    DSCDD_GromovHausdorff,
+    DSCDD_PHT,
+    DSCDD_PermutationEntropy,
+    DSCDD_RQA,
+
+	# NLDSD
+    NLDSD,
+
+    NLDSD_LogisticMap,
+	NLDSD_LorenzAttractor,
+	NLDSD_RosslerAttractor,
+
+    NLDSD_TransientLogisticMap,
+	NLDSD_TransientLorenzAttractor,
+
+	# functions
+	# DSCDD
+	getMeasure,
+	reset,
+	processStream,
+	print,
+
+	# NLDSD
+	get_points,
+	produce_points,
+	add_noise,
+	warm_up,
+
+	LogisticMap,
+	LorenzAttractor,
+	RosslerAttractor,
+	reset_stream
+)
+
+S3method(get_points, NLDSD)
+
+S3method(print, DSCDD)
+
+S3method(update, DSCDD_R)
+
