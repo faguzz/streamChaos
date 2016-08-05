@@ -18,8 +18,8 @@
 
 ### constructor
 DSCDD_GromovHausdorff <- function(m=2, d=1, window.length=800,
-								  landmarking=c("none", "random", "kmeans"),
-								  landmarks.num=window.length/10) {
+								  landmarking=c("none", "random", "kmeans", "maxmin"),
+								  landmarks.num=window.length/20) {
 
 	gromovHausdorff <- gromovHausdorff$new(m=m, d=d,
 										   window.length=window.length,
@@ -89,10 +89,10 @@ gromovHausdorff <- setRefClass("gromovHausdorff",
 
 				# random landmarking
 				if (landmarking == "random") {
-					a.sample <- sample(1:nrow(window.data$embedded.data), landmarks.num)
-					b.sample <- sample(1:nrow(old.window.data$embedded.data), landmarks.num)
-					a <- window.data$embedded.data[a.sample,]
-					b <- old.window.data$embedded.data[b.sample,]
+					landmarks.a <- sample(1:nrow(window.data$embedded.data), landmarks.num)
+					landmarks.b <- sample(1:nrow(old.window.data$embedded.data), landmarks.num)
+					a <- window.data$embedded.data[landmarks.a,]
+					b <- old.window.data$embedded.data[landmarks.b,]
 				}
 
 				# kmeans landmarking
@@ -103,12 +103,19 @@ gromovHausdorff <- setRefClass("gromovHausdorff",
 					b <- centers.b$centers
 				}
 
+				# maxmin landmarking
+				if (landmarking == "maxmin") {
+					landmarks.a <- maxminLandmarking(window.data$embedded.data, landmarks.num)
+					landmarks.b <- maxminLandmarking(old.window.data$embedded.data, landmarks.num)
+					a <- window.data$embedded.data[landmarks.a,]
+					b <- old.window.data$embedded.data[landmarks.b,]
+				}
+
 				ret <- gromovdist(dist(a),
 								  dist(b))
 				return(ret)
 			}
 
-			print("Sliding window not filled")
 			return(NA)
 		},
 
@@ -123,6 +130,25 @@ gromovHausdorff <- setRefClass("gromovHausdorff",
 										  delay.dimension=d)
 
 			old.window.data <<- NULL
+		},
+
+		maxminLandmarking = function(X, num) {
+			N <- nrow(X)
+
+			landmarks <- c()
+			i <- sample(1:N, size=1)
+			landmarks <- c(landmarks, i)
+
+			while (length(landmarks) < num) {
+				Y <- X
+				Y[landmarks,] <- NaN
+				D <- proxy::dist(Y, matrix(X[landmarks,], ncol=ncol(X)))
+				class(D) <- "matrix"
+				Dmin <- do.call(pmin, as.data.frame(D))
+				i <- which.max(Dmin)
+				landmarks <- c(landmarks, i)
+			}
+			landmarks
 		}
 	)
 )
