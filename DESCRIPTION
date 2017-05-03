@@ -1,11 +1,15 @@
 Package: streamChaos
-Type: Package
-Title: What the package does (short line)
-Version: 1.0
-Date: 2016-07-25
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
-Depends: R (>= 2.13.0), methods, proxy (>= 0.4-7), stream (>= 1.2-2)
-Imports: tseriesChaos, pracma, seewave, permute, gromovlab
+Version: 0.1
+Date: 2017-05-01
+Title: Analysis of Non Linear Data Streams
+Authors@R: person("Fausto", "Guzzo da Costa", email="fausto@icmc.usp.br", role=c("aut", "cre"))
+Description: A framework for analyzing nonlinear data streams (and nonlinear time series).
+Depends: R (>= 3.3.2), tseriesChaos, proxy, gromovlab, pracma, seewave, permute, crqa
+Imports: graphics, stats, utils
+URL: https://github.com/faustogc/streamChaos/
+BugReports: https://github.com/faustogc/streamChaos/issues
+License: GPL-3
+Author: Fausto Guzzo da Costa [aut, cre]
+Maintaner: Fausto Guzzo da Costa <fausto@icmc.usp.br>
+Encoding: UTF-8
+LazyData: true
