@@ -19,12 +19,12 @@
 ### constructor
 DSCDD_GromovHausdorff <- function(m=2, d=1, window.length=800,
 								  landmarking=c("none", "random", "kmeans", "maxmin"),
-								  landmarks.num=window.length/20) {
+								  landmarking.size=window.length/20) {
 
 	gromovHausdorff <- gromovHausdorff$new(m=m, d=d,
 										   window.length=window.length,
 										   landmarking=landmarking,
-										   landmarks.num=landmarks.num)
+										   landmarking.size=landmarking.size)
 
 	description <- "Gromov-Hausdorff distance"
 
@@ -41,7 +41,7 @@ gromovHausdorff <- setRefClass("gromovHausdorff",
 		d = "numeric",
 		window.length   = "numeric",
 		landmarking     = "character",
-		landmarks.num   = "numeric",
+		landmarking.size= "numeric",
 		window.data     = "ANY",
 		old.window.data = "ANY",
 		verbose = "logical"
@@ -53,13 +53,13 @@ gromovHausdorff <- setRefClass("gromovHausdorff",
 			d=NULL,
 			window.length=NULL,
 			landmarking=NULL,
-			landmarks.num=NULL
+			landmarking.size=NULL
 		) {
 			m <<- m
 			d <<- d
 			window.length <<- window.length
 			landmarking <<- landmarking
-			landmarks.num <<- landmarks.num
+			landmarking.size <<- landmarking.size
 
 			reset()
 
@@ -89,24 +89,24 @@ gromovHausdorff <- setRefClass("gromovHausdorff",
 
 				# random landmarking
 				if (landmarking == "random") {
-					landmarks.a <- sample(1:nrow(window.data$embedded.data), landmarks.num)
-					landmarks.b <- sample(1:nrow(old.window.data$embedded.data), landmarks.num)
+					landmarks.a <- sample(1:nrow(window.data$embedded.data), landmarking.size)
+					landmarks.b <- sample(1:nrow(old.window.data$embedded.data), landmarking.size)
 					a <- window.data$embedded.data[landmarks.a,]
 					b <- old.window.data$embedded.data[landmarks.b,]
 				}
 
 				# kmeans landmarking
 				if (landmarking == "kmeans") {
-					centers.a <- kmeans(window.data$embedded.data, landmarks.num)
-					centers.b <- kmeans(old.window.data$embedded.data, landmarks.num)
+					centers.a <- kmeans(window.data$embedded.data, landmarking.size)
+					centers.b <- kmeans(old.window.data$embedded.data, landmarking.size)
 					a <- centers.a$centers
 					b <- centers.b$centers
 				}
 
 				# maxmin landmarking
 				if (landmarking == "maxmin") {
-					landmarks.a <- maxminLandmarking(window.data$embedded.data, landmarks.num)
-					landmarks.b <- maxminLandmarking(old.window.data$embedded.data, landmarks.num)
+					landmarks.a <- maxminLandmarking(window.data$embedded.data, landmarking.size)
+					landmarks.b <- maxminLandmarking(old.window.data$embedded.data, landmarking.size)
 					a <- window.data$embedded.data[landmarks.a,]
 					b <- old.window.data$embedded.data[landmarks.b,]
 				}
@@ -120,8 +120,8 @@ gromovHausdorff <- setRefClass("gromovHausdorff",
 		},
 
 		printParameters = function() {
-			cat("m=", m, ", d=", d, "landmarking=", landmarking,
-				"landmarks.num=", landmarks.num, "\n", sep='')
+			cat("m=", m, ", d=", d, ", landmarking=", landmarking,
+				", landmarking.size=", landmarking.size, "\n", sep='')
 		},
 
 		reset = function() {

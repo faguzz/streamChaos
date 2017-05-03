@@ -22,7 +22,7 @@
 
 ### constructor
 DSCDD_RQA <- function(m=2, d=1, window.length=800, radius,
-	measure.type=c("RR", "DET", "LMAX")) {
+	measure.type=c("RR", "DET", "maxL")) {
 
 	rqa <- rqa$new(m=m, d=d, radius=radius, window.length=window.length, measure.type=measure.type)
 
@@ -81,15 +81,12 @@ rqa <- setRefClass("rqa",
 		},
 
 		computeRQA = function(...) {
-			rqa.measures <- crqa(window.data$data, window.data$data,
-								 delay=m, embed=d, radius=radius,
-								 normalize=0, rescale=0,
-								 mindiagline=2, minvertline=2)[1:9]
 
-			# LMAX = 1/maxL
-			rqa.measures$LMAX <- 1/rqa.measures$maxL
+            ret <- crqa(window.data$data, window.data$data, delay=d,
+            embed=m, normalize=F, rescale=F, radius=radius,
+            mindiagline=2, minvertline=2)
 
-			return(rqa.measures[[measure.type]])
+			return(ret[measure.type])
 		},
 
 		computeR = function() {

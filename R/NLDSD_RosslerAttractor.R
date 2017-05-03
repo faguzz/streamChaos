@@ -20,12 +20,8 @@
 #    XXX
 
 NLDSD_RosslerAttractor <- function(N, start.x=c(0, 0, 0), parms=c(0.15, 0.2, 10.0),
-								 dt=0.3, warming.up.num=1000, range=NULL,
+								 dt=0.3, warming.up.num=1000, range=matrix(c(-15, 18), ncol=2, nrow=1, byrow=T),
 								 noise.type="None", noise.parms=list()) {
-	if (is.null(range)) {
-		range <- matrix(c(-15, 18), ncol=2, nrow=1, byrow=T)
-	}
-
 	# error checking
 	if (N < 1)
 		stop("invalid number of observations")

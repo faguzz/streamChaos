@@ -24,9 +24,9 @@
 ### constructor
 DSCDD_MultidimensionalFourier <- function(m=2, d=1, nbins=7, window.length=800) {
 
-	description <- "Multidimensional Fourier"
-
 	multidimensionalFourier <- multidimensionalFourier$new(m=m, d=d, nbins=nbins, window.length=window.length)
+
+	description <- "Multidimensional Fourier"
 
 	l <- list(description = description, RObj = multidimensionalFourier)
 
@@ -60,7 +60,7 @@ multidimensionalFourier <- setRefClass("multidimensionalFourier",
 			nbins <<- nbins
 			window.length <<- window.length
 
-			resetMDF()
+			reset()
 
 			verbose <<- F
 
@@ -129,7 +129,7 @@ multidimensionalFourier <- setRefClass("multidimensionalFourier",
 			for (i in 1:ncol(data)) {
 				discretized.data[,i] <- findInterval(data[,i],
 										seq(from=min(data[,i], na.rm=T), to=max(data[,i], na.rm=T),
-											by=(max(data[,i], na.rm=T)-min(data[,i], na.rm=T))/(nbins-i)))
+										    by=(max(data[,i], na.rm=T)-min(data[,i], na.rm=T))/(nbins-i)))
 			}
 
 			grid <- list()
@@ -190,7 +190,7 @@ multidimensionalFourier <- setRefClass("multidimensionalFourier",
 			cat("m=", m, ", d=", d, ", nbins=", nbins, "\n", sep='')
 		},
 
-		resetMDF = function() {
+		reset = function() {
 			window.data <<- SlidingWindow(window.length=window.length,
 										embedding.dimension=m, delay.dimension=d)
 

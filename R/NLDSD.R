@@ -22,6 +22,7 @@ produce_points <- function(dsd, n=1) {
 	UseMethod("produce_points")
 }
 
+
 get_points.NLDSD <- function(dsd, n=1, outofpoints=c("stop", "warn", "ignore"),
 							 assignment=F, ...) {
     n <- as.integer(n)
@@ -126,8 +127,8 @@ warm_up.default <- function(dsd) {
 	}
 }
 
-plot.NLDSD <- function(x, n=500, assignment=T) {
-    points <- get_points(x, n, assignment=assignment)
+plot.NLDSD <- function(dsd, n=500, assignment=T) {
+    points <- get_points(dsd, n, assignment=assignment)
 
     plot(rownames(points), points[,1], ylim=c(0,1), type='p', pch='.')
 
@@ -136,7 +137,7 @@ plot.NLDSD <- function(x, n=500, assignment=T) {
     }
 }
 
-reset_stream.DSD_TransientLorenzAttractor <- function(dsd) {
+reset_stream.NLDSD <- function(dsd) {
     dsd$state$counter <- 0
 	dsd$state$warm_up <- F
 #    dsd$state$start.x <-
