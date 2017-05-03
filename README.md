@@ -44,6 +44,8 @@ par(new=T, xaxt='n', yaxt='n')
 ts.plot(ret$measures, col=2, xlab='', ylab='')
 ```
 
+![Processed stream](https://github.com/faustogc/streamChaos/raw/master/img/dsd-pe.png)
+
 ## References
 
 Algorithms:
