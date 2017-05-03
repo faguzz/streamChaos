@@ -21,7 +21,7 @@ dsd <- NLDSD_TransientLogisticMap(N=12000)
 
 ```
 
-Process such stream using the Permutation Entropy algorithm.
+Process such stream using the Permutation Entropy algorithm with a sliding window of 800 observations, sliding 10 observations by iteration.
 
 ```R
 pe <- DSCDD_PermutationEntropy(m=5, d=1, window.length=800)
