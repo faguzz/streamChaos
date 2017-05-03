@@ -14,7 +14,7 @@ Based on the package:
 
 Load the package and create a data stream based on a transient Logistic Map:
 
-![Transient Logistic Map](http://latex.codecogs.com/gif.latex?x_t%20%3D%20r_t%20%5Ccdot%20x_%7Bt-1%7D%20%281%20-%20x_%7Bt-1%7D%29), in which (http://latex.codecogs.com/gif.latex?r_t%20%5Cin%20%5B2.0%2C%204.0%5D)$.
+![Transient Logistic Map](http://latex.codecogs.com/gif.latex?x_t%20%3D%20r_t%20%5Ccdot%20x_%7Bt-1%7D%20%281%20-%20x_%7Bt-1%7D%29), in which ![rt range](http://latex.codecogs.com/gif.latex?r_t%20%5Cin%20%5B2.0%2C%204.0%5D).
 
 
 ```R
