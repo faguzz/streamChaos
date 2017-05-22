@@ -1,56 +1,22 @@
 \name{DSCDD}
 \alias{DSCDD}
-%- Also NEED an '\alias' for EACH other topic documented here.
+\alias{DSCDD_R}
 \title{
-%%  ~~function to do ... ~~
+Data Stream Concept Drift Detector
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
-\usage{
-DSCDD(...)
-}
-%- maybe also 'usage' for other objects documented here.
-\arguments{
-  \item{\dots}{
-%%     ~~Describe \code{\dots} here~~
-}
+Abstract base class for all DSCDD (Data Stream Concept Drift Detectors) and DSCDD\_R classes.
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
-}
-\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
+The \code{DSCDD} and \code{DSCDD_R} classes cannot be instantiated, but they serve as a base class from which other DSCDD classes inherit.
+
+Class \code{DSCDD} provides several generic functions: \code{print()}, \code{plot()}, \code{getMeasure()} to get the current measure based on input data, \code{reset()} to reset it to its initial state. The function \code{processStream()} process the whole stream, getting the measures after each interaction. \code{getMeasure()} and \code{reset()} are typically overwritten by subclasses of \code{DSCDD}. \code{DSCDD_R} provides these functions for R-based DSCDD implementations.
 }
 \author{
-%%  ~~who you are~~
+Fausto Guzzo da Costa
 }
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{getMeasures}}
+\code{\link[streamChaos]{plot}}
+\code{\link{processStream}}
 }
-\examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (...) 
-stop("DSCDD is an abstract class and cannot be instantiated!")
-}
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
