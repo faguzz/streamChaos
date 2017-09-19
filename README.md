@@ -18,8 +18,6 @@ Load the package and create a data stream based on a transient Logistic Map:
 
 
 ```R
-options(warn=-1)
-
 library("streamChaos")
 
 dsd <- NLDSD_TransientLogisticMap(N=12000)
@@ -37,8 +35,6 @@ ret <- processStream(dsd, pe, window.step=10)
 Plot the results.
 
 ```R
-options(repr.plot.width=7, repr.plot.height=5)
-
 plot(ret$ds[,1], pch='.')
 par(new=T, xaxt='n', yaxt='n')
 ts.plot(ret$measures, col=2, xlab='', ylab='')
